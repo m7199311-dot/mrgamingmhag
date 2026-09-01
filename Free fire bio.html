@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Gaming Free Fire Bio Color Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background: #05050d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .card {
+            background: rgba(15, 15, 25, 0.95);
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            border: 2px solid #7600bc;
+            transition: all 0.5s ease;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #00e5ff;
+            object-fit: cover;
+            box-shadow: 0 0 10px #00e5ff;
+            background-color: #111;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 10px #00e5ff;
+            text-transform: uppercase;
+        }
+
+        .controls-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .glow-switch-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #00e5ff;
+        }
+
+        .switch-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #00e5ff;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 20px;
+            border: 1px solid #555;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #ff0055;
+            box-shadow: 0 0 10px #ff0055;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 650px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-label {
+            font-size: 13px;
+            color: #00e5ff;
+            margin-bottom: 5px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ff0055;
+        }
+
+        .color-box {
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #222;
+            transition: transform 0.2s;
+        }
+
+        .color-box:hover { transform: scale(1.05); }
+
+        .picker-panel {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00e5ff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .picker-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .color-preview-large {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            border: 1px solid #fff;
+            background: #FF0000;
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            cursor: pointer;
+            background: none;
+        }
+
+        .sliders {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .slider-group span { width: 12px; }
+
+        input[type="range"] {
+            flex: 1;
+            height: 4px;
+            accent-color: #00e5ff;
+            cursor: pointer;
+        }
+
+        .neon-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #7600bc;
+            border-radius: 6px;
+            padding: 8px;
+            color: #fff;
+            box-shadow: 0 0 6px rgba(118, 0, 188, 0.5);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #ff0055, #7600bc);
+            color: #fff;
+            border: none;
+            padding: 0 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .display-box {
+            min-height: 38px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .code-box {
+            color: #00ffcc;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: #aaa;
+            float: right;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #00e5ff, #0072ff);
+            color: #000;
+        }
+
+        .btn-reset {
+            background: rgba(255, 0, 85, 0.2);
+            color: #ff0055;
+            border: 1px solid #ff0055;
+        }
+
+        #readyBiosSection {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #ff0055;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #ff0055;
+            box-shadow: 0 0 10px #ff0055;
+        }
+
+        .bio-list {
+            max-height: 350px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 5px;
+        }
+
+        .bio-item {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ff0055;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bio-text {
+            font-size: 13px;
+            color: #00ffcc;
+            line-height: 1.4;
+            font-family: monospace;
+        }
+
+        .btn-mini-copy {
+            background: #ff0055;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* সোশ্যাল মিডিয়া ফুটার বাটন ডিজাইন */
+        .social-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .btn-yt {
+            background: linear-gradient(135deg, #FF0000, #cc0000);
+            border: 1px solid #ff4d4d;
+        }
+
+        .btn-yt:hover {
+            box-shadow: 0 0 15px #ff0000;
+            transform: translateY(-2px);
+        }
+
+        .btn-fb {
+            background: linear-gradient(135deg, #1877F2, #0d5cb9);
+            border: 1px solid #4c9aff;
+        }
+
+        .btn-fb:hover {
+            box-shadow: 0 0 15px #1877f2;
+            transform: translateY(-2px);
+        }
+
+        @keyframes rgbGlow {
+            0% { border-color: #ff0055; box-shadow: 0 0 20px #ff0055; }
+            50% { border-color: #00e5ff; box-shadow: 0 0 20px #00e5ff; }
+            100% { border-color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+        }
+
+        .rgb-active-card { animation: rgbGlow 6s infinite alternate ease-in-out !important; }
+        .dark-attitude-mode { background: #0b0206 !important; }
+    </style>
+</head>
+<body>
+
+<div class="card" id="mainCard">
+    <div class="header-container">
+        <div class="brand-info">
+            <img src="logo.png" class="user-logo" alt="MR Gaming Logo">
+            <div class="title">MR GAMING FF BIO</div>
+        </div>
+        
+        <div class="controls-wrapper">
+            <div class="glow-switch-container">
+                <span class="switch-label" id="switchStatusText">RGB OFF</span>
+                <label class="switch">
+                    <input type="checkbox" id="glowToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="glow-switch-container" style="border-color: #ff0055;">
+                <span class="switch-label" style="color: #ff0055;">SAD/ATTITUDE</span>
+                <label class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-container" id="generatorSection">
+        <div class="left-panel">
+            <span class="section-label">১. প্রধান ৮টি কালার সিলেক্ট করুন:</span>
+            <div class="color-palette">
+                <div class="color-box" style="background: #FF0000;" onclick="setColorHex('#FF0000')"></div>
+                <div class="color-box" style="background: #00FF00;" onclick="setColorHex('#00FF00')"></div>
+                <div class="color-box" style="background: #0000FF;" onclick="setColorHex('#0000FF')"></div>
+                <div class="color-box" style="background: #FFFF00;" onclick="setColorHex('#FFFF00')"></div>
+                <div class="color-box" style="background: #800080;" onclick="setColorHex('#800080')"></div>
+                <div class="color-box" style="background: #00FFFF;" onclick="setColorHex('#00FFFF')"></div>
+                <div class="color-box" style="background: #FFA500;" onclick="setColorHex('#FFA500')"></div>
+                <div class="color-box" style="background: #FFFFFF;" onclick="setColorHex('#FFFFFF')"></div>
+            </div>
+
+            <span class="section-label">২. কাস্টম কালার (RGB / পিকার):</span>
+            <div class="picker-panel">
+                <div class="picker-row">
+                    <div class="color-preview-large" id="largePreview"></div>
+                    <input type="color" id="nativePicker" value="#ff0000" oninput="updateFromNative(this.value)">
+                </div>
+                <div class="sliders">
+                    <div class="slider-group" style="color: #ff5555;"><span>R</span><input type="range" id="redRange" min="0" max="255" value="255" oninput="updateFromSliders()"></div>
+                    <div class="slider-group" style="color: #55ff55;"><span>G</span><input type="range" id="greenRange" min="0" max="255" value="0" oninput="updateFromSliders()"></div>
+                    <div class="slider-group" style="color: #5588ff;"><span>B</span><input type="range" id="blueRange" min="0" max="255" value="0" oninput="updateFromSliders()"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <span class="section-label">৩. টেক্সট টাইপ করুন:</span>
+            <div class="input-group">
+                <div class="neon-box" style="flex: 1;"><input type="text" id="userInput" placeholder="যেমন: Musa Khan"></div>
+                <button class="btn-add" onclick="addText()">যুক্ত করুন</button>
+            </div>
+
+            <span class="section-label">লাইভ প্রিভিউ:</span>
+            <div class="neon-box display-box" id="previewArea"></div>
+
+            <span class="section-label">ফ্রি ফায়ার কোড: <span class="char-counter">অক্ষর: <b id="charCount" style="color: #00e5ff;">0</b></span></span>
+            <div class="neon-box display-box code-box" id="codeArea"></div>
+
+            <div class="action-buttons">
+                <button class="btn-action btn-copy" onclick="copyCode()">কপি করুন</button>
+                <button class="btn-action btn-reset" onclick="resetAll()">রিসেট</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="readyBiosSection">
+        <div class="tab-buttons">
+            <button class="tab-btn active" id="btnBanglaTab">বাংলা ডায়লগ (১০০টি)</button>
+            <button class="tab-btn" id="btnEnglishTab">ইংরেজি বায়ো (FF Code)</button>
+        </div>
+
+        <div class="bio-list" id="bioListContainer"></div>
+    </div>
+
+    <div class="social-footer">
+        <a href="https://youtube.com/@musa0000-n7v?si=9Db3uUcKWO-m7MaN" target="_blank" class="social-btn btn-yt">
+            <i class="fa-brands fa-youtube"></i> YouTube Channel
+        </a>
+        <a href="https://www.facebook.com/share/1DbjffiMGg/" target="_blank" class="social-btn btn-fb">
+            <i class="fa-brands fa-facebook-f"></i> Facebook Profile
+        </a>
+    </div>
+
+</div>
+
+<script>
+    let selectedColorHex = '#FF0000';
+    let generatedCode = '';
+    let currentTab = 'bangla';
+
+    const banglaSadDialogues = [
+        "[FF0000]🥀 অবহেলা শিখিয়ে দিলে 💔",
+        "[FF0055]💔 একা চলতেই ভালো লাগে 🖤",
+        "[00FFFF]⚡ শূন্য থেকে শুরু ভাই 😈",
+        "[FFFF00]👑 রাজা নিজের রাজ্যে 👑",
+        "[00FF00]🎯 একাই একশো আমি 🔥",
+        "[FFA500]🔥 আগুন হতে শিখো 💣",
+        "[800080]🖤 নীরবতাই আমার রূপ ♠️",
+        "[FF0000]☠️ কোনো মাফ নেই রে 😈",
+        "[00FFFF]❄️ বরফের মতো ঠান্ডা ❄️",
+        "[FF0055]🥀 ভুল মানুষ বেছেছিলাম 💔",
+        "[FFFF00]⚡ গেম তো সবে শুরু ভাই 🎮",
+        "[00FF00]🐍 সাপের চেয়ে বিষাক্ত 🐍",
+        "[800080]👑 কিং সব সময়ই কিং 👑",
+        "[FFA500]🦁 সিংহের মতো রাজত্ব 🦁",
+        "[FF0000]💣 এক শটে খতম সব 💣",
+        "[00FFFF]🌊 একা থাকার আনন্দ 🌊",
+        "[FF0055]💔 বুক ভরা কষ্ট আমার 💔",
+        "[FFFF00]🔥 কথা কম কাজ বেশি 🔥",
+        "[00FF00]🎯 হেডশট এর ওস্তাদ 🎯",
+        "[800080]🖤 বিষাদময় এক জীবন 🖤",
+        "[FFA500]⚡ ঝড়ের বেগে আসবো ⚡",
+        "[FF0000]👑 নিজের পথ নিজে বানাই 👑",
+        "[00FFFF]💎 নামটাই যথেষ্ট ভাই 💎",
+        "[FF0055]🥀 হারিয়ে গেছি আমি 🥀",
+        "[FFFF00]⚠️ সামনে আসিস না ভাই ⚠️",
+        "[00FF00]🎮 গেমারদের সেরা আমি 🎮",
+        "[800080]♠️ ডার্ক নাইট আমার নাম ♠️",
+        "[FFA500]🔥 আগুন লাগাতে আসছি 🔥",
+        "[FF0000]☠️ রক্ত গরম সব সময় ☠️",
+        "[00FFFF]❄️ শান্ত মনের আগুন ❄️",
+        "[FF0055]💔 মন ভেঙেছে কবেই 💔",
+        "[FFFF00]⚡ রাশের মাস্টার আমি ⚡",
+        "[00FF00]🐍 বিষাক্ত চোখের আলো 🐍",
+        "[800080]👑 একক ছায়ায় থাকি 👑",
+        "[FFA500]🦁 বনের রাজা সিংহই 🦁",
+        "[FF0000]💣 একাই গুঁড়িয়ে দেবো 💣",
+        "[00FFFF]🌊 জীবনটা বড় অদ্ভুত 🌊",
+        "[FF0055]🥀 কেউ কারো নয়রে ভাই 🥀",
+        "[FFFF00]🔥 সময়ের খেলা দেখবি 🔥",
+        "[00FF00]🎯 সোলো ভার্সাস স্কোয়াড 🎯",
+        "[800080]🖤 অন্ধকারই আমার ঘর 🖤",
+        "[FFA500]⚡ বাজপাখির মতো নজর ⚡",
+        "[FF0000]👑 আমিই শেষ কথা ভাই 👑",
+        "[00FFFF]💎 হীরার চেয়ে দামি 💎",
+        "[FF0055]💔 বিশ্বাস ভেঙে গেছে 💔",
+        "[FFFF00]⚠️ সোজা ফিনিশ দিবো ⚠️",
+        "[00FF00]🎮 প্রো গেমার আইডি 🎮",
+        "[800080]♠️ ছায়ার দেশে বাস ♠️",
+        "[FFA500]🔥 অ্যাটিটিউড সব সময় 🔥",
+        "[FF0000]☠️ মরণ কামড় দিবো ☠️",
+        "[00FFFF]❄️ ঠান্ডা মাথায় খেলা ❄️",
+        "[FF0055]💔 অভিনয় ভালো পারি না 💔",
+        "[FFFF00]⚡ দ্রুত গতির কিং ⚡",
+        "[00FF00]🐍 নাছোড়বান্দা প্লেয়ার 🐍",
+        "[800080]👑 আমি আমার বসের বস্ 👑",
+        "[FFA500]🦁 গর্জন শুনবি ভাই 🦁",
+        "[FF0000]💣 বোমার মতো ফুটবো 💣",
+        "[00FFFF]🌊 জীবন এক নদীর মতো 🌊",
+        "[FF0055]🥀 কদর কেউ বোঝে না 🥀",
+        "[FFFF00]🔥 রূপের বড়াই করিস না 🔥",
+        "[00FF00]🎯 লক্ষ্য একটাই জয় 🎯",
+        "[800080]🖤 একাকী বীর আমি 🖤",
+        "[FFA500]⚡ ঝড়ের আগে নীরবতা ⚡",
+        "[FF0000]👑 সম্রাট হয়ে বাঁচবো 👑",
+        "[00FFFF]💎 নিজেকে চিনে নাও 💎",
+        "[FF0055]💔 মায়ায় জড়াবো না 💔",
+        "[FFFF00]⚠️ চোখ কান খোলা রাখ ⚠️",
+        "[00FF00]🎮 মাস্টার মাইন্ড গেমার 🎮",
+        "[800080]♠️ রহস্যময় একজন ♠️",
+        "[FFA500]🔥 আগুনের ফুলকি 🔥",
+        "[FF0000]☠️ একাই যথেষ্ট আমি ☠️",
+        "[00FFFF]❄️ নীরবতার শক্তি ❄️",
+        "[FF0055]💔 হৃদয় শূন্য হয়ে গেছে 💔",
+        "[FFFF00]⚡ দ্রুততার সাথে জয় ⚡",
+        "[00FF00]🐍 বিষধর এক প্লেয়ার 🐍",
+        "[800080]👑 সেরা হতে আসছি 👑",
+        "[FFA500]🦁 আমার নিয়মই শেষ 🦁",
+        "[FF0000]💣 ম্যাচ ফিনিশার আমি 💣",
+        "[00FFFF]👑 আসল রাজা আমি 👑"
+    ];
+
+    const englishBios = [
+        "[FF0000]👑 [FFFF00]KING [00FF00]OF [00FFFF]FF",
+        "[FF0055]💔 [FFFFFF]BROKEN [000000]HEART",
+        "[00FFFF]⚡ [FF0000]ONE [FFFF00]TAP [00FF00]GOD",
+        "[FF0000]☠️ [000000]NO [FFFFFF]MERCY",
+        "[FFA500]🔥 [FF0000]ATTITUDE [FFFF00]BOY",
+        "[800080]🖤 [FF0055]SAD [FFFFFF]LIFE",
+        "[00FF00]🎯 [FF0000]ONLY [FFFF00]HEADSHOT",
+        "[00FFFF]❄️ [FFFFFF]SILENT [000000]KILLER",
+        "[FF0000]😈 [FFFF00]DEVIL [00FF00]INSIDE",
+        "[FF9900]👑 [FFFFFF]MR [FF0000]GAMER"
+    ];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const modeToggle = document.getElementById('modeToggle');
+        const glowToggle = document.getElementById('glowToggle');
+        const btnEnglishTab = document.getElementById('btnEnglishTab');
+        const btnBanglaTab = document.getElementById('btnBanglaTab');
+
+        if (modeToggle) {
+            modeToggle.addEventListener('change', function() {
+                const genSection = document.getElementById('generatorSection');
+                const biosSection = document.getElementById('readyBiosSection');
+
+                if (this.checked) {
+                    if (genSection) genSection.style.display = 'none';
+                    if (biosSection) biosSection.style.display = 'block';
+                    document.body.classList.add('dark-attitude-mode');
+                    renderBioList();
+                } else {
+                    if (genSection) genSection.style.display = 'grid';
+                    if (biosSection) biosSection.style.display = 'none';
+                    document.body.classList.remove('dark-attitude-mode');
+                }
+            });
+        }
+
+        if (glowToggle) {
+            glowToggle.addEventListener('change', function() {
+                const statusText = document.getElementById('switchStatusText');
+                const card = document.getElementById('mainCard');
+                if (this.checked) {
+                    if (statusText) statusText.innerText = "RGB ON";
+                    if (card) card.classList.add('rgb-active-card');
+                } else {
+                    if (statusText) statusText.innerText = "RGB OFF";
+                    if (card) card.classList.remove('rgb-active-card');
+                }
+            });
+        }
+
+        if (btnEnglishTab) {
+            btnEnglishTab.addEventListener('click', function() {
+                currentTab = 'english';
+                this.classList.add('active');
+                if (btnBanglaTab) btnBanglaTab.classList.remove('active');
+                renderBioList();
+            });
+        }
+
+        if (btnBanglaTab) {
+            btnBanglaTab.addEventListener('click', function() {
+                currentTab = 'bangla';
+                this.classList.add('active');
+                if (btnEnglishTab) btnEnglishTab.classList.remove('active');
+                renderBioList();
+            });
+        }
+    });
+
+    function renderBioList() {
+        const container = document.getElementById('bioListContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const listToRender = (currentTab === 'bangla') ? banglaSadDialogues : englishBios;
+
+        listToRender.forEach(text => {
+            const item = document.createElement('div');
+            item.className = 'bio-item';
+            item.innerHTML = `
+                <span class="bio-text">${text}</span>
+                <button class="btn-mini-copy" onclick="copyDirect('${text.replace(/'/g, "\\'")}')">কপি</button>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function copyDirect(text) {
+        navigator.clipboard.writeText(text);
+        alert('কপি হয়েছে!');
+    }
+
+    function updateUI(hex) {
+        selectedColorHex = hex.toUpperCase();
+        document.getElementById('largePreview').style.backgroundColor = selectedColorHex;
+        document.getElementById('nativePicker').value = selectedColorHex;
+        let r = parseInt(selectedColorHex.slice(1, 3), 16) || 0;
+        let g = parseInt(selectedColorHex.slice(3, 5), 16) || 0;
+        let b = parseInt(selectedColorHex.slice(5, 7), 16) || 0;
+        document.getElementById('redRange').value = r;
+        document.getElementById('greenRange').value = g;
+        document.getElementById('blueRange').value = b;
+    }
+
+    function setColorHex(hex) { updateUI(hex); }
+    function updateFromNative(hex) { updateUI(hex); }
+
+    function updateFromSliders() {
+        let r = parseInt(document.getElementById('redRange').value).toString(16).padStart(2, '0');
+        let g = parseInt(document.getElementById('greenRange').value).toString(16).padStart(2, '0');
+        let b = parseInt(document.getElementById('blueRange').value).toString(16).padStart(2, '0');
+        let hex = `#${r}${g}${b}`;
+        selectedColorHex = hex.toUpperCase();
+        document.getElementById('largePreview').style.backgroundColor = selectedColorHex;
+        document.getElementById('nativePicker').value = selectedColorHex;
+    }
+
+    function addText() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
+        if (!text) return;
+        const cleanHex = selectedColorHex.replace('#', '');
+        generatedCode += `[${cleanHex}]${text}`;
+        document.getElementById('codeArea').innerText = generatedCode;
+        document.getElementById('charCount').innerText = generatedCode.length;
+        const span = document.createElement('span');
+        span.style.color = selectedColorHex;
+        span.innerText = text + ' ';
+        document.getElementById('previewArea').appendChild(span);
+    }
+
+    function copyCode() { if (!generatedCode) return; navigator.clipboard.writeText(generatedCode); alert('কোড কপি হয়েছে!'); }
+    function resetAll() { generatedCode = ''; document.getElementById('codeArea').innerText = ''; document.getElementById('previewArea').innerHTML = ''; document.getElementById('charCount').innerText = '0'; }
+</script>
+
+</body>
+</html>
