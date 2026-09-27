@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
+<html lang="bn"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>পিকনিক ফান্ডের হিসাব</title>
@@ -361,9 +359,18 @@
     </div>
 
     <!-- হোম পেজ -->
-    <div id="homePage" class="view active">
-        <div class="grand-total" id="grandTotalDisplay">সর্বমোট জমা: ৳ ০</div>
-        <ul class="member-list" id="memberList"></ul>
+    <div id="homePage" class="view">
+        <div class="grand-total" id="grandTotalDisplay">সর্বমোট জমা: ৳ 40</div>
+        <ul class="member-list" id="memberList"><li class="member-card">
+                <span class="member-info-name">👤 Md Musa Khan</span>
+                <span class="member-info-total">৳ 30</span>
+            </li><li class="member-card">
+                <span class="member-info-name">👤 হাসান</span>
+                <span class="member-info-total">৳ 0</span>
+            </li><li class="member-card">
+                <span class="member-info-name">👤 সপন</span>
+                <span class="member-info-total">৳ 10</span>
+            </li></ul>
 
         <div class="home-add-box">
             <p style="font-size: 0.8rem; color: var(--highlight-color); margin-bottom: 8px; text-align: center;">➕ নতুন সদস্য যোগ করতে নাম লিখুন</p>
@@ -374,20 +381,26 @@
         </div>
 
         <div class="social-footer">
-            <a href="#" id="fbLink" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" id="ytLink" target="_blank" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
-            <a href="#" id="ttLink" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://facebook.com" id="fbLink" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://youtube.com" id="ytLink" target="_blank" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+            <a href="https://tiktok.com" id="ttLink" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
         </div>
     </div>
 
     <!-- সদস্যের বিস্তারিত পেজ -->
     <div id="detailPage" class="view">
         <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
-        <div class="member-header" id="currentMemberName">সদস্যের নাম</div>
-        <div class="member-subtotal" id="currentMemberTotal">মোট জমা: ৳ ০</div>
-        <div class="target-status-box" id="targetStatusBox">টার্গেট স্ট্যাটাস লোড হচ্ছে...</div>
+        <div class="member-header" id="currentMemberName">👤 সপন</div>
+        <div class="member-subtotal" id="currentMemberTotal">মোট জমা: ৳ 10</div>
+        <div class="target-status-box" id="targetStatusBox">🎯 টার্গেট: ৳900 | বকেয়া: ৳890<br>⏰ বাকি দিন: <b>90 দিন</b><br>💡 মিশন পূরণ করতে প্রতিদিন অন্তত <b>৳10</b> করে জমা দিতে হবে।</div>
         
-        <div id="memberHistoryList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;"></div>
+        <div id="memberHistoryList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;"><div class="history-item">
+                <div>
+                    <div style="color: #fff; font-weight: bold;">+ ৳ 10</div>
+                    <div class="history-date"><i class="far fa-calendar-alt"></i> ২৮ সেপ্টেম্বর, ২০২৬</div>
+                </div>
+                <button class="delete-history-btn" onclick="deleteHistoryItem(1790538373355)">রিমুভ</button>
+            </div></div>
 
         <div style="background: #111118; padding: 12px; border-radius: 10px; border: 1px solid var(--highlight-color);">
             <p style="font-size: 0.8rem; color: var(--highlight-color); margin-bottom: 8px; text-align: center;">🔒 টাকা জমা দিতে পাসওয়ার্ড দিন</p>
@@ -410,24 +423,30 @@
     </div>
 
     <!-- আসল সেটিংস পেজ -->
-    <div id="settingsPage" class="view">
+    <div id="settingsPage" class="view active">
         <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
         <h3 style="color: var(--accent-color); margin-bottom: 15px;">⚙ সেটিংস ও ম্যানেজমেন্ট</h3>
 
-        <!-- কোড কপি ও মেসেঞ্জার লিংক সেটিংস -->
+        <!-- ১. কোড কপি করার আলাদা সেকশন -->
         <div class="setting-box" style="border: 1px solid var(--accent-color);">
-            <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">📋 কোড কপি ও মেসেঞ্জার রিডাইরেক্ট</h4>
-            <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 10px;">কোড কপি করার পর ইউজার যে মেসেঞ্জারে যাবে সেই লিংকটি এখানে দিন:</p>
-            <div class="input-group">
-                <label class="input-label">কপি করার পরের মেসেঞ্জার লিংক:</label>
-                <input type="text" id="copyRedirectLinkInput" class="input-field" placeholder="https://m.me/your-link">
-            </div>
-            <button class="action-btn" onclick="saveCopyRedirectLink()" style="background: var(--accent-color); color: #000; margin-bottom: 8px;">[ লিংক সেভ করুন ]</button>
+            <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">📋 কোড কপি ও রিডাইরেক্ট অপশন</h4>
+            <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 10px;">কোড কপি করলে সরাসরি আপনার সেট করা মেসেঞ্জার লিংকে চলে যাবে:</p>
             <button class="action-btn" onclick="copyFullCode()" style="background: var(--highlight-color); color: #fff;">[ 📄 কোড কপি করুন ও মেসেঞ্জারে যান ]</button>
         </div>
 
+        <!-- ২. মেসেঞ্জার লিংক বসানোর আলাদা সেকশন (পাসওয়ার্ড সুরক্ষিত) -->
         <div class="setting-box" style="border: 1px solid var(--highlight-color);">
-            <h4 style="color: var(--highlight-color); margin-bottom: 8px; font-size: 0.95rem;">🎯 চাঁদার টার্গেট ও ডেডলাইন সেটআপ</h4>
+            <h4 style="color: var(--highlight-color); margin-bottom: 8px; font-size: 0.95rem;">🔗 কপি করার পরের মেসেঞ্জার লিংক সেটআপ</h4>
+            <div class="input-group">
+                <label class="input-label">মেসেঞ্জার লিংক:</label>
+                <input type="text" id="copyRedirectLinkInput" class="input-field" placeholder="https://m.me/your-link">
+            </div>
+            <button class="action-btn" onclick="saveCopyRedirectLink()" style="background: var(--accent-color); color: #000;">[ লিংক সেভ করুন (পাসওয়ার্ড লাগবে) ]</button>
+        </div>
+
+        <!-- চাঁদার টার্গেট ও ডেডলাইন সেটআপ -->
+        <div class="setting-box">
+            <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">🎯 চাঁদার টার্গেট ও ডেডলাইন সেটআপ</h4>
             <div class="input-group">
                 <label class="input-label">প্রত্যেক সদস্যের মোট লক্ষ্য (টাকা):</label>
                 <input type="number" id="targetAmountInput" class="input-field" placeholder="যেমন: ৫০০০">
@@ -436,9 +455,10 @@
                 <label class="input-label">প্রত্যাশিত শেষ তারিখ (Deadline):</label>
                 <input type="date" id="targetDateInput" class="input-field" style="background:#000; color:#fff; padding:8px;">
             </div>
-            <button class="action-btn" onclick="saveTargetSettings()" style="background: var(--highlight-color); color: #fff;">[ টার্গেট সেভ করুন ]</button>
+            <button class="action-btn" onclick="saveTargetSettings()" style="background: var(--accent-color); color: #000;">[ টার্গেট সেভ করুন (পাসওয়ার্ড লাগবে) ]</button>
         </div>
 
+        <!-- সোশ্যাল মিডিয়া ও চ্যাট বক্স কাস্টমাইজ -->
         <div class="setting-box">
             <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">🌐 সোশ্যাল মিডিয়া ও চ্যাট বক্স কাস্টমাইজ</h4>
             <div class="input-group">
@@ -449,7 +469,6 @@
                 <label class="input-label">প্রথম মেসেঞ্জার লিংক:</label>
                 <input type="text" id="admin1LinkInput" class="input-field">
             </div>
-            <!-- দ্বিতীয় চ্যাট বাটন অপশন -->
             <div class="input-group" style="margin-top: 10px;">
                 <label class="input-label">দ্বিতীয় চ্যাট বাটন নাম:</label>
                 <input type="text" id="admin2NameInput" class="input-field">
@@ -458,25 +477,34 @@
                 <label class="input-label">দ্বিতীয় মেসেঞ্জার লিংক:</label>
                 <input type="text" id="admin2LinkInput" class="input-field">
             </div>
-            <button class="action-btn" onclick="saveSocialLinks()" style="background: var(--accent-color); color: #000;">[ সোশ্যাল লিংক সেভ করুন ]</button>
+            <button class="action-btn" onclick="saveSocialLinks()" style="background: var(--accent-color); color: #000;">[ সোশ্যাল লিংক সেভ করুন (পাসওয়ার্ড লাগবে) ]</button>
         </div>
 
+        <!-- সদস্য ডিলিট জোন -->
         <div class="danger-zone">
             <h4 style="color: var(--danger-color); margin-bottom: 6px; font-size: 0.95rem;"><i class="fas fa-exclamation-triangle"></i> সদস্য ডিলিট জোন</h4>
-            <div class="danger-notice">⚠️ সতর্কতা: কোনো সদস্যকে ডিলিট করলে তা স্থায়ীভাবে মুছে যাবে এবং দ্বিতীয়বার আর ফিরে পাবেন না!</div>
+            <div class="danger-notice">⚠️ সতর্কতা: কোনো সদস্যকে ডিলিট করতে পাসওয়ার্ড লাগবে!</div>
             <div class="input-group">
                 <label class="input-label">ডিলিট করার জন্য সদস্য সিলেক্ট করুন:</label>
-                <select id="deleteMemberSelect" class="input-field" style="background:#000; color:#fff; padding:10px; border-color:var(--danger-color);"></select>
+                <select id="deleteMemberSelect" class="input-field" style="background:#000; color:#fff; padding:10px; border-color:var(--danger-color);"><option value="1">Md Musa Khan</option><option value="1790527434985">হাসান</option><option value="1790538363300">সপন</option></select>
             </div>
             <button class="action-btn" onclick="deleteSelectedMember()" style="background: var(--danger-color); color: #fff;">[ 🗑️ সদস্য চিরতরে ডিলিট করুন ]</button>
         </div>
 
         <div class="danger-zone">
             <h4 style="color: var(--danger-color); margin-bottom: 6px; font-size: 0.95rem;"><i class="fas fa-history"></i> রিমুভড হিস্ট্রি লগ (ট্র্যাশ)</h4>
-            <div class="danger-notice">তথ্য: যে সমস্ত টাকার এন্ট্রি ডিলিট করা হয়েছে, সেগুলোর অ্যাড করার তারিখ ও ডিলিট করার তারিখ এখানে সংরক্ষিত থাকে।</div>
-            <div id="deletedHistoryLogList" style="max-height: 150px; overflow-y: auto; margin-top: 8px;"></div>
+            <div id="deletedHistoryLogList" style="max-height: 150px; overflow-y: auto; margin-top: 8px;"><div style="background: rgb(10, 10, 12); border: 1px solid var(--danger-color); border-radius: 6px; padding: 8px; margin-bottom: 6px; font-size: 0.78rem;">
+                <div style="color: var(--accent-color); font-weight: bold;">👤 Md Musa Khan - ৳500</div>
+                <div style="color: #ccc;">➕ অ্যাড হয়েছিল: ১ জুন ২০২৬</div>
+                <div style="color: #ff88a3;">❌ রিমুভ হয়েছে: ২৭ সেপ্টেম্বর, ২০২৬</div>
+            </div><div style="background: rgb(10, 10, 12); border: 1px solid var(--danger-color); border-radius: 6px; padding: 8px; margin-bottom: 6px; font-size: 0.78rem;">
+                <div style="color: var(--accent-color); font-weight: bold;">👤 হাসান - ৳100</div>
+                <div style="color: #ccc;">➕ অ্যাড হয়েছিল: ২৭ সেপ্টেম্বর, ২০২৬</div>
+                <div style="color: #ff88a3;">❌ রিমুভ হয়েছে: ২৮ সেপ্টেম্বর, ২০২৬</div>
+            </div></div>
         </div>
 
+        <!-- থিম কালার -->
         <div class="setting-box">
             <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🎨 থিম কালার চুজ করুন</h4>
             <div class="color-dots">
@@ -486,6 +514,7 @@
             </div>
         </div>
 
+        <!-- পাসওয়ার্ড পরিবর্তন -->
         <div class="setting-box">
             <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🔑 পাসওয়ার্ড পরিবর্তন</h4>
             <div class="input-group">
@@ -497,12 +526,12 @@
     </div>
 </div>
 
-<!-- ভাসমান চ্যাট বক্স (দুটি চ্যাট বাটনসহ) -->
+<!-- ভাসমান চ্যাট বক্স -->
 <div class="floating-chat-container" id="draggableChat">
     <div class="floating-popup" id="floatingPopup">
         <div class="popup-title">💬 সরাসরি যোগাযোগ করুন</div>
-        <a href="#" id="floatingAdmin1" target="_blank" class="popup-link-btn"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin1">চ্যাট ১</span></a>
-        <a href="#" id="floatingAdmin2" target="_blank" class="popup-link-btn" style="background: #0084ff;"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin2">চ্যাট ২</span></a>
+        <a href="https://m.me/md.musa.khan.122549" id="floatingAdmin1" target="_blank" class="popup-link-btn"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin1">আমার সাথে চ্যাট</span></a>
+        <a href="#" id="floatingAdmin2" target="_blank" class="popup-link-btn" style="background: #0084ff;"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin2">অ্যাডমিন ২</span></a>
     </div>
     <div class="floating-btn" id="floatingBtn" onclick="togglePopup()">
         <i class="fas fa-comment-dots"></i>
@@ -578,7 +607,18 @@
         }
     }
 
-    // কোড কপি এবং আপনার মেসেঞ্জারে রিডাইরেক্ট করার ফাংশন
+    // পাসওয়ার্ড ভেরিফাই করার কমন ফাংশন
+    function verifyPasswordBeforeSave() {
+        const pass = prompt("সংরক্ষণ করতে পাসওয়ার্ড দিন:");
+        if (pass === APP_DATA.generalPass) {
+            return true;
+        } else {
+            alert("❌ ভুল পাসওয়ার্ড! সেভ করা সম্ভব হয়নি।");
+            return false;
+        }
+    }
+
+    // কোড কপি এবং মেসেঞ্জারে রিডাইরেক্ট
     function copyFullCode() {
         const fullCode = document.documentElement.outerHTML;
         navigator.clipboard.writeText(fullCode).then(() => {
@@ -591,6 +631,7 @@
     }
 
     function saveCopyRedirectLink() {
+        if(!verifyPasswordBeforeSave()) return;
         const link = document.getElementById('copyRedirectLinkInput').value.trim();
         if(link) {
             APP_DATA.copyRedirectLink = link;
@@ -600,6 +641,7 @@
     }
 
     function saveTargetSettings() {
+        if(!verifyPasswordBeforeSave()) return;
         const amt = parseFloat(document.getElementById('targetAmountInput').value);
         const date = document.getElementById('targetDateInput').value;
         if(!isNaN(amt)) APP_DATA.targetAmount = amt;
@@ -609,6 +651,7 @@
     }
 
     function saveSocialLinks() {
+        if(!verifyPasswordBeforeSave()) return;
         const n1 = document.getElementById('admin1NameInput').value.trim();
         const link1 = document.getElementById('admin1LinkInput').value.trim();
         const n2 = document.getElementById('admin2NameInput').value.trim();
@@ -657,6 +700,7 @@
     }
 
     function deleteSelectedMember() {
+        if(!verifyPasswordBeforeSave()) return;
         const select = document.getElementById('deleteMemberSelect');
         const memberId = parseInt(select.value);
         if(!memberId) return;
@@ -689,9 +733,9 @@
     }
 
     function deleteHistoryItem(historyId) {
-        const pass = prompt("⚠️ সতর্কতা: এই টাকার হিসাব ডিলিট করতে পাসওয়ার্ড দিন। এটি ডিলিট করলে ট্র্যাশ বক্সে জমা হবে:");
+        const pass = prompt("⚠️ সতর্কতা: এই টাকার হিসাব ডিলিট করতে পাসওয়ার্ড দিন:");
         if(pass !== APP_DATA.generalPass) {
-            alert("❌ ভুল পাসওয়ার্ড! ডিলিট করা সম্ভব হয়নি।");
+            alert("❌ ভুল পাসওয়ার্ড!");
             return;
         }
 
@@ -853,5 +897,6 @@
     }
 </script>
 
-</body>
-</html>
+
+
+</body></html>
