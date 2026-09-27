@@ -3,758 +3,796 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR Gaming Free Fire Bio Color Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>পিকনিক ফান্ডের হিসাব</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0a0a0c;
+            --border-color: #a800ff;
+            --text-color: #ffffff;
+            --accent-color: #00ffd5;
+            --highlight-color: #ff007f;
+            --danger-color: #ff0037;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: #05050d;
-            color: #ffffff;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
-            transition: all 0.5s ease;
+            min-height: 100vh;
+            padding: 15px;
         }
 
         .card {
-            background: rgba(15, 15, 25, 0.95);
-            border-radius: 12px;
-            padding: 15px;
             width: 100%;
-            max-width: 850px;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
-            border: 2px solid #7600bc;
-            transition: all 0.5s ease;
-        }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .brand-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #00e5ff;
-            object-fit: cover;
-            box-shadow: 0 0 10px #00e5ff;
-            background-color: #111;
-        }
-
-        .title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 0 10px #00e5ff;
-            text-transform: uppercase;
-        }
-
-        .controls-wrapper {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .glow-switch-container {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 1px solid #00e5ff;
-        }
-
-        .switch-label {
-            font-size: 11px;
-            font-weight: bold;
-            color: #00e5ff;
-        }
-
-        .switch {
+            max-width: 420px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px var(--border-color), inset 0 0 10px rgba(168, 0, 255, 0.3);
             position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333;
-            transition: .4s;
-            border-radius: 20px;
-            border: 1px solid #555;
+        .app-title {
+            color: var(--highlight-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--highlight-color);
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 14px;
-            width: 14px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #ff0055;
-            box-shadow: 0 0 10px #ff0055;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(20px);
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media (max-width: 650px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .section-label {
-            font-size: 13px;
-            color: #00e5ff;
-            margin-bottom: 5px;
-            display: block;
-            font-weight: 600;
-        }
-
-        .color-palette {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            border: 1px solid #ff0055;
-        }
-
-        .color-box {
-            height: 30px;
-            border-radius: 4px;
-            cursor: pointer;
-            border: 1px solid #222;
-            transition: transform 0.2s;
-        }
-
-        .color-box:hover { transform: scale(1.05); }
-
-        .picker-panel {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #00e5ff;
+        .setting-icon-btn {
+            background: #15151e;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 6px 12px;
             border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .picker-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .color-preview-large {
-            width: 35px;
-            height: 35px;
-            border-radius: 4px;
-            border: 1px solid #fff;
-            background: #FF0000;
-        }
-
-        input[type="color"] {
-            -webkit-appearance: none;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 4px;
             cursor: pointer;
-            background: none;
-        }
-
-        .sliders {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .slider-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11px;
+            font-size: 0.9rem;
             font-weight: bold;
         }
 
-        .slider-group span { width: 12px; }
+        .grand-total {
+            background: #15151e;
+            border: 1px solid var(--accent-color);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ffee00;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
 
-        input[type="range"] {
-            flex: 1;
-            height: 4px;
-            accent-color: #00e5ff;
+        .member-list {
+            list-style: none;
+            max-height: 220px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .member-card {
+            background: #111118;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
         }
 
-        .neon-box {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #7600bc;
-            border-radius: 6px;
-            padding: 8px;
+        .member-info-name {
+            color: var(--accent-color);
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+
+        .member-info-total {
+            color: #ffee00;
+            font-weight: bold;
+        }
+
+        .home-add-box {
+            background: #111118;
+            border: 1px dashed var(--highlight-color);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #222;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            box-shadow: 0 0 6px rgba(118, 0, 188, 0.5);
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .social-icon.facebook { background: #1877f2; }
+        .social-icon.youtube { background: #ff0000; }
+        .social-icon.tiktok { background: #000000; border: 1px solid #ff0055; }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--highlight-color);
+            color: var(--highlight-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .member-header {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .member-subtotal {
+            text-align: center;
+            color: #ffee00;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .target-status-box {
+            background: #15151e;
+            border: 1px solid var(--highlight-color);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.82rem;
+            text-align: center;
+            color: #ff99cc;
+            line-height: 1.5;
         }
 
         .input-group {
-            display: flex;
-            gap: 8px;
             margin-bottom: 10px;
         }
 
-        input[type="text"] {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            font-size: 14px;
+        .input-label {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            color: var(--accent-color);
         }
 
-        .btn-add {
-            background: linear-gradient(135deg, #ff0055, #7600bc);
+        .input-field {
+            width: 100%;
+            padding: 9px;
+            background: #000;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
             color: #fff;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 10px;
             border: none;
-            padding: 0 15px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 13px;
-        }
-
-        .display-box {
-            min-height: 38px;
-            margin-bottom: 10px;
-            font-size: 15px;
-            font-weight: bold;
-            word-break: break-all;
-        }
-
-        .code-box {
-            color: #00ffcc;
-            font-family: monospace;
-            font-size: 13px;
-        }
-
-        .char-counter {
-            font-size: 12px;
-            color: #aaa;
-            float: right;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
             margin-top: 5px;
         }
 
-        .btn-action {
-            flex: 1;
-            padding: 8px;
-            border: none;
+        .history-item {
+            background: #15151e;
+            border-left: 3px solid var(--highlight-color);
+            padding: 8px 12px;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .btn-copy {
-            background: linear-gradient(135deg, #00e5ff, #0072ff);
-            color: #000;
-        }
-
-        .btn-reset {
-            background: rgba(255, 0, 85, 0.2);
-            color: #ff0055;
-            border: 1px solid #ff0055;
-        }
-
-        #readyBiosSection {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #ff0055;
-            color: #fff;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 13px;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: #ff0055;
-            box-shadow: 0 0 10px #ff0055;
-        }
-
-        .bio-list {
-            max-height: 350px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding-right: 5px;
-        }
-
-        .bio-item {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #ff0055;
-            padding: 10px;
-            border-radius: 6px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
         }
 
-        .bio-text {
-            font-size: 13px;
-            color: #00ffcc;
-            line-height: 1.4;
-            font-family: monospace;
+        .history-date {
+            font-size: 0.75rem;
+            color: #aaa;
         }
 
-        .btn-mini-copy {
-            background: #ff0055;
+        .delete-history-btn {
+            background: var(--danger-color);
             color: #fff;
             border: none;
-            padding: 6px 12px;
+            padding: 4px 8px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 0.75rem;
             font-weight: bold;
-            white-space: nowrap;
         }
 
-        /* সোশ্যাল মিডিয়া ফুটার বাটন ডিজাইন */
-        .social-footer {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0, 229, 255, 0.2);
+        .danger-zone {
+            background: #1a0508;
+            border: 2px solid var(--danger-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(255, 0, 55, 0.2);
+        }
+
+        .danger-notice {
+            font-size: 0.78rem;
+            color: #ff88a3;
+            background: rgba(255, 0, 55, 0.1);
+            border-left: 3px solid var(--danger-color);
+            padding: 6px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .setting-box {
+            background: #111118;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+        }
+
+        .color-dots {
             display: flex;
-            justify-content: center;
             gap: 12px;
-            flex-wrap: wrap;
+            margin-bottom: 12px;
+            justify-content: center;
         }
 
-        .social-btn {
-            display: inline-flex;
+        .dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .floating-chat-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .floating-btn {
+            width: 55px;
+            height: 55px;
+            background: var(--highlight-color);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--highlight-color);
+            border: 2px solid #fff;
+        }
+
+        .floating-popup {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 230px;
+            background: #111118;
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            display: none;
+            flex-direction: column;
             gap: 8px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 13px;
+        }
+
+        .floating-popup.show { display: flex; }
+
+        .popup-title {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-align: center;
             font-weight: bold;
-            color: #ffffff;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 4px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 4px;
         }
 
-        .btn-yt {
-            background: linear-gradient(135deg, #FF0000, #cc0000);
-            border: 1px solid #ff4d4d;
+        .popup-link-btn {
+            background: #1877f2;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        .btn-yt:hover {
-            box-shadow: 0 0 15px #ff0000;
-            transform: translateY(-2px);
-        }
-
-        .btn-fb {
-            background: linear-gradient(135deg, #1877F2, #0d5cb9);
-            border: 1px solid #4c9aff;
-        }
-
-        .btn-fb:hover {
-            box-shadow: 0 0 15px #1877f2;
-            transform: translateY(-2px);
-        }
-
-        @keyframes rgbGlow {
-            0% { border-color: #ff0055; box-shadow: 0 0 20px #ff0055; }
-            50% { border-color: #00e5ff; box-shadow: 0 0 20px #00e5ff; }
-            100% { border-color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
-        }
-
-        .rgb-active-card { animation: rgbGlow 6s infinite alternate ease-in-out !important; }
-        .dark-attitude-mode { background: #0b0206 !important; }
+        .view { display: none; }
+        .view.active { display: block; }
     </style>
 </head>
 <body>
 
-<div class="card" id="mainCard">
-    <div class="header-container">
-        <div class="brand-info">
-            <img src="logo.png" class="user-logo" alt="MR Gaming Logo">
-            <div class="title">MR GAMING FF BIO</div>
-        </div>
-        
-        <div class="controls-wrapper">
-            <div class="glow-switch-container">
-                <span class="switch-label" id="switchStatusText">RGB OFF</span>
-                <label class="switch">
-                    <input type="checkbox" id="glowToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="glow-switch-container" style="border-color: #ff0055;">
-                <span class="switch-label" style="color: #ff0055;">SAD/ATTITUDE</span>
-                <label class="switch">
-                    <input type="checkbox" id="modeToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
+<div class="card">
+    <div class="top-bar">
+        <div class="app-title" id="displayAppTitle">🌸 পিকনিক ফান্ডের হিসাব 🌸</div>
+        <button class="setting-icon-btn" onclick="openSettingsGate()">⚙ সেটিং</button>
     </div>
 
-    <div class="grid-container" id="generatorSection">
-        <div class="left-panel">
-            <span class="section-label">১. প্রধান ৮টি কালার সিলেক্ট করুন:</span>
-            <div class="color-palette">
-                <div class="color-box" style="background: #FF0000;" onclick="setColorHex('#FF0000')"></div>
-                <div class="color-box" style="background: #00FF00;" onclick="setColorHex('#00FF00')"></div>
-                <div class="color-box" style="background: #0000FF;" onclick="setColorHex('#0000FF')"></div>
-                <div class="color-box" style="background: #FFFF00;" onclick="setColorHex('#FFFF00')"></div>
-                <div class="color-box" style="background: #800080;" onclick="setColorHex('#800080')"></div>
-                <div class="color-box" style="background: #00FFFF;" onclick="setColorHex('#00FFFF')"></div>
-                <div class="color-box" style="background: #FFA500;" onclick="setColorHex('#FFA500')"></div>
-                <div class="color-box" style="background: #FFFFFF;" onclick="setColorHex('#FFFFFF')"></div>
-            </div>
+    <!-- হোম পেজ -->
+    <div id="homePage" class="view active">
+        <div class="grand-total" id="grandTotalDisplay">সর্বমোট জমা: ৳ ০</div>
+        <ul class="member-list" id="memberList"></ul>
 
-            <span class="section-label">২. কাস্টম কালার (RGB / পিকার):</span>
-            <div class="picker-panel">
-                <div class="picker-row">
-                    <div class="color-preview-large" id="largePreview"></div>
-                    <input type="color" id="nativePicker" value="#ff0000" oninput="updateFromNative(this.value)">
-                </div>
-                <div class="sliders">
-                    <div class="slider-group" style="color: #ff5555;"><span>R</span><input type="range" id="redRange" min="0" max="255" value="255" oninput="updateFromSliders()"></div>
-                    <div class="slider-group" style="color: #55ff55;"><span>G</span><input type="range" id="greenRange" min="0" max="255" value="0" oninput="updateFromSliders()"></div>
-                    <div class="slider-group" style="color: #5588ff;"><span>B</span><input type="range" id="blueRange" min="0" max="255" value="0" oninput="updateFromSliders()"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="right-panel">
-            <span class="section-label">৩. টেক্সট টাইপ করুন:</span>
+        <div class="home-add-box">
+            <p style="font-size: 0.8rem; color: var(--highlight-color); margin-bottom: 8px; text-align: center;">➕ নতুন সদস্য যোগ করতে নাম লিখুন</p>
             <div class="input-group">
-                <div class="neon-box" style="flex: 1;"><input type="text" id="userInput" placeholder="যেমন: Musa Khan"></div>
-                <button class="btn-add" onclick="addText()">যুক্ত করুন</button>
+                <input type="text" id="homeNewMemberName" class="input-field" placeholder="সদস্যের নাম">
             </div>
+            <button class="action-btn" onclick="verifyAndAddNewMember()" style="background: var(--accent-color); color: #000;">[ নতুন সদস্য যুক্ত করুন ]</button>
+        </div>
 
-            <span class="section-label">লাইভ প্রিভিউ:</span>
-            <div class="neon-box display-box" id="previewArea"></div>
-
-            <span class="section-label">ফ্রি ফায়ার কোড: <span class="char-counter">অক্ষর: <b id="charCount" style="color: #00e5ff;">0</b></span></span>
-            <div class="neon-box display-box code-box" id="codeArea"></div>
-
-            <div class="action-buttons">
-                <button class="btn-action btn-copy" onclick="copyCode()">কপি করুন</button>
-                <button class="btn-action btn-reset" onclick="resetAll()">রিসেট</button>
-            </div>
+        <div class="social-footer">
+            <a href="#" id="fbLink" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" id="ytLink" target="_blank" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+            <a href="#" id="ttLink" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
         </div>
     </div>
 
-    <div id="readyBiosSection">
-        <div class="tab-buttons">
-            <button class="tab-btn active" id="btnBanglaTab">বাংলা ডায়লগ (১০০টি)</button>
-            <button class="tab-btn" id="btnEnglishTab">ইংরেজি বায়ো (FF Code)</button>
+    <!-- সদস্যের বিস্তারিত পেজ -->
+    <div id="detailPage" class="view">
+        <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
+        <div class="member-header" id="currentMemberName">সদস্যের নাম</div>
+        <div class="member-subtotal" id="currentMemberTotal">মোট জমা: ৳ ০</div>
+        <div class="target-status-box" id="targetStatusBox">টার্গেট স্ট্যাটাস লোড হচ্ছে...</div>
+        
+        <div id="memberHistoryList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;"></div>
+
+        <div style="background: #111118; padding: 12px; border-radius: 10px; border: 1px solid var(--highlight-color);">
+            <p style="font-size: 0.8rem; color: var(--highlight-color); margin-bottom: 8px; text-align: center;">🔒 টাকা জমা দিতে পাসওয়ার্ড দিন</p>
+            <div class="input-group">
+                <input type="number" id="moneyInput" class="input-field" placeholder="টাকার পরিমাণ">
+            </div>
+            <button class="action-btn" onclick="verifyAndAddMoney()" style="background: var(--accent-color); color: #000;">[ 💰 টাকা জমা করুন ]</button>
+        </div>
+    </div>
+
+    <!-- সেটিংস পাসওয়ার্ড গেটওয়ে -->
+    <div id="settingsGatePage" class="view">
+        <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
+        <div class="setting-box" style="text-align: center;">
+            <h4 style="color: var(--highlight-color); margin-bottom: 10px;">🔒 সেটিংসে প্রবেশ</h4>
+            <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 12px;">পাসওয়ার্ড দিন</p>
+            <input type="password" id="gatePassInput" class="input-field" placeholder="পাসওয়ার্ড" style="margin-bottom: 10px; text-align: center;">
+            <button class="action-btn" onclick="verifySettingsPassword()" style="background: var(--highlight-color); color: #fff;">[ পাসওয়ার্ড দিয়ে খুলুন ]</button>
+        </div>
+    </div>
+
+    <!-- আসল সেটিংস পেজ -->
+    <div id="settingsPage" class="view">
+        <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
+        <h3 style="color: var(--accent-color); margin-bottom: 15px;">⚙ সেটিংস ও ম্যানেজমেন্ট</h3>
+
+        <div class="setting-box" style="border: 1px solid var(--highlight-color);">
+            <h4 style="color: var(--highlight-color); margin-bottom: 8px; font-size: 0.95rem;">🎯 চাঁদার টার্গেট ও ডেডলাইন সেটআপ</h4>
+            <div class="input-group">
+                <label class="input-label">প্রত্যেক সদস্যের মোট লক্ষ্য (টাকা):</label>
+                <input type="number" id="targetAmountInput" class="input-field" placeholder="যেমন: ৫০০০">
+            </div>
+            <div class="input-group">
+                <label class="input-label">প্রত্যাশিত শেষ তারিখ (Deadline):</label>
+                <input type="date" id="targetDateInput" class="input-field" style="background:#000; color:#fff; padding:8px;">
+            </div>
+            <button class="action-btn" onclick="saveTargetSettings()" style="background: var(--highlight-color); color: #fff;">[ টার্গেট সেভ করুন ]</button>
         </div>
 
-        <div class="bio-list" id="bioListContainer"></div>
-    </div>
+        <div class="setting-box">
+            <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">🌐 সোশ্যাল মিডিয়া ও চ্যাট বক্স কাস্টমাইজ</h4>
+            <div class="input-group">
+                <label class="input-label">প্রথম চ্যাট বাটন নাম:</label>
+                <input type="text" id="admin1NameInput" class="input-field">
+            </div>
+            <div class="input-group">
+                <label class="input-label">প্রথম মেসেঞ্জার লিংক:</label>
+                <input type="text" id="admin1LinkInput" class="input-field">
+            </div>
+            <button class="action-btn" onclick="saveSocialLinks()" style="background: var(--accent-color); color: #000;">[ সোশ্যাল লিংক সেভ করুন ]</button>
+        </div>
 
-    <div class="social-footer">
-        <a href="https://youtube.com/@musa0000-n7v?si=9Db3uUcKWO-m7MaN" target="_blank" class="social-btn btn-yt">
-            <i class="fa-brands fa-youtube"></i> YouTube Channel
-        </a>
-        <a href="https://www.facebook.com/share/1DbjffiMGg/" target="_blank" class="social-btn btn-fb">
-            <i class="fa-brands fa-facebook-f"></i> Facebook Profile
-        </a>
-    </div>
+        <div class="danger-zone">
+            <h4 style="color: var(--danger-color); margin-bottom: 6px; font-size: 0.95rem;"><i class="fas fa-exclamation-triangle"></i> সদস্য ডিলিট জোন</h4>
+            <div class="danger-notice">⚠️ সতর্কতা: কোনো সদস্যকে ডিলিট করলে তা স্থায়ীভাবে মুছে যাবে এবং দ্বিতীয়বার আর ফিরে পাবেন না!</div>
+            <div class="input-group">
+                <label class="input-label">ডিলিট করার জন্য সদস্য সিলেক্ট করুন:</label>
+                <select id="deleteMemberSelect" class="input-field" style="background:#000; color:#fff; padding:10px; border-color:var(--danger-color);"></select>
+            </div>
+            <button class="action-btn" onclick="deleteSelectedMember()" style="background: var(--danger-color); color: #fff;">[ 🗑️ সদস্য চিরতরে ডিলিট করুন ]</button>
+        </div>
 
+        <div class="danger-zone">
+            <h4 style="color: var(--danger-color); margin-bottom: 6px; font-size: 0.95rem;"><i class="fas fa-history"></i> রিমুভড হিস্ট্রি লগ (ট্র্যাশ)</h4>
+            <div class="danger-notice">তথ্য: যে সমস্ত টাকার এন্ট্রি ডিলিট করা হয়েছে, সেগুলোর অ্যাড করার তারিখ ও ডিলিট করার তারিখ এখানে সংরক্ষিত থাকে।</div>
+            <div id="deletedHistoryLogList" style="max-height: 150px; overflow-y: auto; margin-top: 8px;"></div>
+        </div>
+
+        <div class="setting-box">
+            <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🎨 থিম কালার চুজ করুন</h4>
+            <div class="color-dots">
+                <div class="dot" style="background: #a800ff;" onclick="setTheme('#a800ff', '#ff007f')"></div>
+                <div class="dot" style="background: #00ffd5;" onclick="setTheme('#00ffd5', '#ff0055')"></div>
+                <div class="dot" style="background: #ffaa00;" onclick="setTheme('#ffaa00', '#00ffee')"></div>
+            </div>
+        </div>
+
+        <div class="setting-box">
+            <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🔑 পাসওয়ার্ড পরিবর্তন</h4>
+            <div class="input-group">
+                <label class="input-label">নতুন পাসওয়ার্ড:</label>
+                <input type="password" id="newGeneralPass" class="input-field" placeholder="নতুন পাসওয়ার্ড">
+            </div>
+            <button class="action-btn" onclick="saveNewPasswords()" style="background: var(--accent-color); color: #000; margin-bottom:0;">[ পাসওয়ার্ড সেভ করুন ]</button>
+        </div>
+    </div>
+</div>
+
+<div class="floating-chat-container" id="draggableChat">
+    <div class="floating-popup" id="floatingPopup">
+        <div class="popup-title">💬 সরাসরি যোগাযোগ করুন</div>
+        <a href="#" id="floatingAdmin1" target="_blank" class="popup-link-btn"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin1">চ্যাট করুন</span></a>
+    </div>
+    <div class="floating-btn" id="floatingBtn" onclick="togglePopup()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
 </div>
 
 <script>
-    let selectedColorHex = '#FF0000';
-    let generatedCode = '';
-    let currentTab = 'bangla';
+    let APP_DATA = JSON.parse(localStorage.getItem('picnic_app_data')) || {
+        appTitle: "🌸 পিকনিক ফান্ডের হিসাব 🌸",
+        generalPass: "1234",   
+        targetAmount: 2000,
+        targetDeadline: "2026-06-30",
+        admin1Name: "আমার সাথে চ্যাট",
+        admin1ChatLink: "https://m.me/md.musa.khan.122549",
+        members: [
+            {
+                id: 1,
+                name: "Md Musa Khan",
+                history: [
+                    { id: 101, amount: 500, dateTime: "১ জুন ২০২৬" }
+                ]
+            }
+        ],
+        trashHistory: []
+    };
 
-    const banglaSadDialogues = [
-        "[FF0000]🥀 অবহেলা শিখিয়ে দিলে 💔",
-        "[FF0055]💔 একা চলতেই ভালো লাগে 🖤",
-        "[00FFFF]⚡ শূন্য থেকে শুরু ভাই 😈",
-        "[FFFF00]👑 রাজা নিজের রাজ্যে 👑",
-        "[00FF00]🎯 একাই একশো আমি 🔥",
-        "[FFA500]🔥 আগুন হতে শিখো 💣",
-        "[800080]🖤 নীরবতাই আমার রূপ ♠️",
-        "[FF0000]☠️ কোনো মাফ নেই রে 😈",
-        "[00FFFF]❄️ বরফের মতো ঠান্ডা ❄️",
-        "[FF0055]🥀 ভুল মানুষ বেছেছিলাম 💔",
-        "[FFFF00]⚡ গেম তো সবে শুরু ভাই 🎮",
-        "[00FF00]🐍 সাপের চেয়ে বিষাক্ত 🐍",
-        "[800080]👑 কিং সব সময়ই কিং 👑",
-        "[FFA500]🦁 সিংহের মতো রাজত্ব 🦁",
-        "[FF0000]💣 এক শটে খতম সব 💣",
-        "[00FFFF]🌊 একা থাকার আনন্দ 🌊",
-        "[FF0055]💔 বুক ভরা কষ্ট আমার 💔",
-        "[FFFF00]🔥 কথা কম কাজ বেশি 🔥",
-        "[00FF00]🎯 হেডশট এর ওস্তাদ 🎯",
-        "[800080]🖤 বিষাদময় এক জীবন 🖤",
-        "[FFA500]⚡ ঝড়ের বেগে আসবো ⚡",
-        "[FF0000]👑 নিজের পথ নিজে বানাই 👑",
-        "[00FFFF]💎 নামটাই যথেষ্ট ভাই 💎",
-        "[FF0055]🥀 হারিয়ে গেছি আমি 🥀",
-        "[FFFF00]⚠️ সামনে আসিস না ভাই ⚠️",
-        "[00FF00]🎮 গেমারদের সেরা আমি 🎮",
-        "[800080]♠️ ডার্ক নাইট আমার নাম ♠️",
-        "[FFA500]🔥 আগুন লাগাতে আসছি 🔥",
-        "[FF0000]☠️ রক্ত গরম সব সময় ☠️",
-        "[00FFFF]❄️ শান্ত মনের আগুন ❄️",
-        "[FF0055]💔 মন ভেঙেছে কবেই 💔",
-        "[FFFF00]⚡ রাশের মাস্টার আমি ⚡",
-        "[00FF00]🐍 বিষাক্ত চোখের আলো 🐍",
-        "[800080]👑 একক ছায়ায় থাকি 👑",
-        "[FFA500]🦁 বনের রাজা সিংহই 🦁",
-        "[FF0000]💣 একাই গুঁড়িয়ে দেবো 💣",
-        "[00FFFF]🌊 জীবনটা বড় অদ্ভুত 🌊",
-        "[FF0055]🥀 কেউ কারো নয়রে ভাই 🥀",
-        "[FFFF00]🔥 সময়ের খেলা দেখবি 🔥",
-        "[00FF00]🎯 সোলো ভার্সাস স্কোয়াড 🎯",
-        "[800080]🖤 অন্ধকারই আমার ঘর 🖤",
-        "[FFA500]⚡ বাজপাখির মতো নজর ⚡",
-        "[FF0000]👑 আমিই শেষ কথা ভাই 👑",
-        "[00FFFF]💎 হীরার চেয়ে দামি 💎",
-        "[FF0055]💔 বিশ্বাস ভেঙে গেছে 💔",
-        "[FFFF00]⚠️ সোজা ফিনিশ দিবো ⚠️",
-        "[00FF00]🎮 প্রো গেমার আইডি 🎮",
-        "[800080]♠️ ছায়ার দেশে বাস ♠️",
-        "[FFA500]🔥 অ্যাটিটিউড সব সময় 🔥",
-        "[FF0000]☠️ মরণ কামড় দিবো ☠️",
-        "[00FFFF]❄️ ঠান্ডা মাথায় খেলা ❄️",
-        "[FF0055]💔 অভিনয় ভালো পারি না 💔",
-        "[FFFF00]⚡ দ্রুত গতির কিং ⚡",
-        "[00FF00]🐍 নাছোড়বান্দা প্লেয়ার 🐍",
-        "[800080]👑 আমি আমার বসের বস্ 👑",
-        "[FFA500]🦁 গর্জন শুনবি ভাই 🦁",
-        "[FF0000]💣 বোমার মতো ফুটবো 💣",
-        "[00FFFF]🌊 জীবন এক নদীর মতো 🌊",
-        "[FF0055]🥀 কদর কেউ বোঝে না 🥀",
-        "[FFFF00]🔥 রূপের বড়াই করিস না 🔥",
-        "[00FF00]🎯 লক্ষ্য একটাই জয় 🎯",
-        "[800080]🖤 একাকী বীর আমি 🖤",
-        "[FFA500]⚡ ঝড়ের আগে নীরবতা ⚡",
-        "[FF0000]👑 সম্রাট হয়ে বাঁচবো 👑",
-        "[00FFFF]💎 নিজেকে চিনে নাও 💎",
-        "[FF0055]💔 মায়ায় জড়াবো না 💔",
-        "[FFFF00]⚠️ চোখ কান খোলা রাখ ⚠️",
-        "[00FF00]🎮 মাস্টার মাইন্ড গেমার 🎮",
-        "[800080]♠️ রহস্যময় একজন ♠️",
-        "[FFA500]🔥 আগুনের ফুলকি 🔥",
-        "[FF0000]☠️ একাই যথেষ্ট আমি ☠️",
-        "[00FFFF]❄️ নীরবতার শক্তি ❄️",
-        "[FF0055]💔 হৃদয় শূন্য হয়ে গেছে 💔",
-        "[FFFF00]⚡ দ্রুততার সাথে জয় ⚡",
-        "[00FF00]🐍 বিষধর এক প্লেয়ার 🐍",
-        "[800080]👑 সেরা হতে আসছি 👑",
-        "[FFA500]🦁 আমার নিয়মই শেষ 🦁",
-        "[FF0000]💣 ম্যাচ ফিনিশার আমি 💣",
-        "[00FFFF]👑 আসল রাজা আমি 👑"
-    ];
+    function saveAppData() {
+        localStorage.setItem('picnic_app_data', JSON.stringify(APP_DATA));
+    }
 
-    const englishBios = [
-        "[FF0000]👑 [FFFF00]KING [00FF00]OF [00FFFF]FF",
-        "[FF0055]💔 [FFFFFF]BROKEN [000000]HEART",
-        "[00FFFF]⚡ [FF0000]ONE [FFFF00]TAP [00FF00]GOD",
-        "[FF0000]☠️ [000000]NO [FFFFFF]MERCY",
-        "[FFA500]🔥 [FF0000]ATTITUDE [FFFF00]BOY",
-        "[800080]🖤 [FF0055]SAD [FFFFFF]LIFE",
-        "[00FF00]🎯 [FF0000]ONLY [FFFF00]HEADSHOT",
-        "[00FFFF]❄️ [FFFFFF]SILENT [000000]KILLER",
-        "[FF0000]😈 [FFFF00]DEVIL [00FF00]INSIDE",
-        "[FF9900]👑 [FFFFFF]MR [FF0000]GAMER"
-    ];
+    let activeMemberId = null;
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const modeToggle = document.getElementById('modeToggle');
-        const glowToggle = document.getElementById('glowToggle');
-        const btnEnglishTab = document.getElementById('btnEnglishTab');
-        const btnBanglaTab = document.getElementById('btnBanglaTab');
-
-        if (modeToggle) {
-            modeToggle.addEventListener('change', function() {
-                const genSection = document.getElementById('generatorSection');
-                const biosSection = document.getElementById('readyBiosSection');
-
-                if (this.checked) {
-                    if (genSection) genSection.style.display = 'none';
-                    if (biosSection) biosSection.style.display = 'block';
-                    document.body.classList.add('dark-attitude-mode');
-                    renderBioList();
-                } else {
-                    if (genSection) genSection.style.display = 'grid';
-                    if (biosSection) biosSection.style.display = 'none';
-                    document.body.classList.remove('dark-attitude-mode');
-                }
-            });
-        }
-
-        if (glowToggle) {
-            glowToggle.addEventListener('change', function() {
-                const statusText = document.getElementById('switchStatusText');
-                const card = document.getElementById('mainCard');
-                if (this.checked) {
-                    if (statusText) statusText.innerText = "RGB ON";
-                    if (card) card.classList.add('rgb-active-card');
-                } else {
-                    if (statusText) statusText.innerText = "RGB OFF";
-                    if (card) card.classList.remove('rgb-active-card');
-                }
-            });
-        }
-
-        if (btnEnglishTab) {
-            btnEnglishTab.addEventListener('click', function() {
-                currentTab = 'english';
-                this.classList.add('active');
-                if (btnBanglaTab) btnBanglaTab.classList.remove('active');
-                renderBioList();
-            });
-        }
-
-        if (btnBanglaTab) {
-            btnBanglaTab.addEventListener('click', function() {
-                currentTab = 'bangla';
-                this.classList.add('active');
-                if (btnEnglishTab) btnEnglishTab.classList.remove('active');
-                renderBioList();
-            });
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+        renderMemberList();
+        applyLinks();
     });
 
-    function renderBioList() {
-        const container = document.getElementById('bioListContainer');
-        if (!container) return;
-        container.innerHTML = '';
+    function togglePopup() {
+        document.getElementById('floatingPopup').classList.toggle('show');
+    }
 
-        const listToRender = (currentTab === 'bangla') ? banglaSadDialogues : englishBios;
+    function showPage(pageId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        if(pageId === 'homePage') renderMemberList();
+        if(pageId === 'settingsPage') {
+            updateDropdowns();
+            renderTrashHistory();
+            document.getElementById('admin1NameInput').value = APP_DATA.admin1Name;
+            document.getElementById('admin1LinkInput').value = APP_DATA.admin1ChatLink;
+            document.getElementById('targetAmountInput').value = APP_DATA.targetAmount;
+            document.getElementById('targetDateInput').value = APP_DATA.targetDeadline;
+        }
+    }
 
-        listToRender.forEach(text => {
-            const item = document.createElement('div');
-            item.className = 'bio-item';
-            item.innerHTML = `
-                <span class="bio-text">${text}</span>
-                <button class="btn-mini-copy" onclick="copyDirect('${text.replace(/'/g, "\\'")}')">কপি</button>
-            `;
-            container.appendChild(item);
+    function openSettingsGate() {
+        // সেটিংসে ক্লিক করলে সরাসরি আসল সেটিংসে না গিয়ে পাসওয়ার্ড চাওয়ার গেটওয়ে পেজে যাবে
+        showPage('settingsGatePage');
+    }
+
+    function verifySettingsPassword() {
+        const pass = document.getElementById('gatePassInput').value.trim();
+        if(pass === APP_DATA.generalPass) {
+            document.getElementById('gatePassInput').value = '';
+            // পাসওয়ার্ড মিললে তবেই আসল সেটিংসে নিয়ে যাবে
+            showPage('settingsPage');
+        } else {
+            alert("❌ ভুল পাসওয়ার্ড!");
+        }
+    }
+
+    function saveTargetSettings() {
+        const amt = parseFloat(document.getElementById('targetAmountInput').value);
+        const date = document.getElementById('targetDateInput').value;
+        if(!isNaN(amt)) APP_DATA.targetAmount = amt;
+        if(date) APP_DATA.targetDeadline = date;
+        saveAppData();
+        alert("✅ টার্গেট সেটিংস সফলভাবে সেভ হয়েছে!");
+    }
+
+    function saveSocialLinks() {
+        const n1 = document.getElementById('admin1NameInput').value.trim();
+        const link1 = document.getElementById('admin1LinkInput').value.trim();
+        if(n1) APP_DATA.admin1Name = n1;
+        if(link1) APP_DATA.admin1ChatLink = link1;
+        saveAppData();
+        applyLinks();
+        alert("✅ লিংক সেভ করা হয়েছে!");
+    }
+
+    function updateDropdowns() {
+        const delSelect = document.getElementById('deleteMemberSelect');
+        delSelect.innerHTML = '';
+        if(APP_DATA.members.length === 0) {
+            delSelect.innerHTML = '<option value="">কোনো সদস্য নেই</option>';
+            return;
+        }
+        APP_DATA.members.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.id;
+            opt.innerText = m.name;
+            delSelect.appendChild(opt);
         });
     }
 
-    function copyDirect(text) {
-        navigator.clipboard.writeText(text);
-        alert('কপি হয়েছে!');
+    function verifyAndAddNewMember() {
+        const name = document.getElementById('homeNewMemberName').value.trim();
+        if(!name) { alert("দয়া করে সদস্যের নাম লিখুন!"); return; }
+
+        const pass = prompt("নতুন সদস্য যোগ করতে পাসওয়ার্ড দিন:");
+        if(pass !== APP_DATA.generalPass) {
+            alert("❌ ভুল পাসওয়ার্ড! সদস্য যোগ করা সম্ভব হয়নি।");
+            return;
+        }
+
+        APP_DATA.members.push({ id: Date.now(), name: name, history: [] });
+        saveAppData();
+        document.getElementById('homeNewMemberName').value = '';
+        renderMemberList();
+        alert(`✅ "${name}" সফলভাবে যুক্ত হয়েছে!`);
     }
 
-    function updateUI(hex) {
-        selectedColorHex = hex.toUpperCase();
-        document.getElementById('largePreview').style.backgroundColor = selectedColorHex;
-        document.getElementById('nativePicker').value = selectedColorHex;
-        let r = parseInt(selectedColorHex.slice(1, 3), 16) || 0;
-        let g = parseInt(selectedColorHex.slice(3, 5), 16) || 0;
-        let b = parseInt(selectedColorHex.slice(5, 7), 16) || 0;
-        document.getElementById('redRange').value = r;
-        document.getElementById('greenRange').value = g;
-        document.getElementById('blueRange').value = b;
+    function deleteSelectedMember() {
+        const select = document.getElementById('deleteMemberSelect');
+        const memberId = parseInt(select.value);
+        if(!memberId) return;
+        
+        if(confirm("⚠️ চূড়ান্ত সতর্কতা: এই সদস্যকে ডিলিট করলে দ্বিতীয়বার আর ফিরে পাবেন না। আপনি কি নিশ্চিত?")) {
+            APP_DATA.members = APP_DATA.members.filter(m => m.id !== memberId);
+            saveAppData();
+            updateDropdowns();
+            renderMemberList();
+            alert("🗑️ সদস্য চিরতরে ডিলিট করা হয়েছে!");
+        }
     }
 
-    function setColorHex(hex) { updateUI(hex); }
-    function updateFromNative(hex) { updateUI(hex); }
+    function verifyAndAddMoney() {
+        const pass = prompt("টাকা জমা দিতে পাসওয়ার্ড দিন:");
+        if(pass !== APP_DATA.generalPass) { alert("❌ ভুল পাসওয়ার্ড!"); return; }
 
-    function updateFromSliders() {
-        let r = parseInt(document.getElementById('redRange').value).toString(16).padStart(2, '0');
-        let g = parseInt(document.getElementById('greenRange').value).toString(16).padStart(2, '0');
-        let b = parseInt(document.getElementById('blueRange').value).toString(16).padStart(2, '0');
-        let hex = `#${r}${g}${b}`;
-        selectedColorHex = hex.toUpperCase();
-        document.getElementById('largePreview').style.backgroundColor = selectedColorHex;
-        document.getElementById('nativePicker').value = selectedColorHex;
+        const amt = parseFloat(document.getElementById('moneyInput').value);
+        if(isNaN(amt) || amt <= 0) { alert("সঠিক পরিমাণ লিখুন!"); return; }
+
+        const member = APP_DATA.members.find(m => m.id === activeMemberId);
+        if(member) {
+            const currentDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+            member.history.push({ id: Date.now(), amount: amt, dateTime: currentDate });
+            saveAppData();
+            document.getElementById('moneyInput').value = '';
+            renderMemberDetail();
+            alert("✅ টাকা জমা হয়েছে!");
+        }
     }
 
-    function addText() {
-        const input = document.getElementById('userInput');
-        const text = input.value.trim();
-        if (!text) return;
-        const cleanHex = selectedColorHex.replace('#', '');
-        generatedCode += `[${cleanHex}]${text}`;
-        document.getElementById('codeArea').innerText = generatedCode;
-        document.getElementById('charCount').innerText = generatedCode.length;
-        const span = document.createElement('span');
-        span.style.color = selectedColorHex;
-        span.innerText = text + ' ';
-        document.getElementById('previewArea').appendChild(span);
+    function deleteHistoryItem(historyId) {
+        const pass = prompt("⚠️ সতর্কতা: এই টাকার হিসাব ডিলিট করতে পাসওয়ার্ড দিন। এটি ডিলিট করলে ট্র্যাশ বক্সে জমা হবে:");
+        if(pass !== APP_DATA.generalPass) {
+            alert("❌ ভুল পাসওয়ার্ড! ডিলিট করা সম্ভব হয়নি।");
+            return;
+        }
+
+        const member = APP_DATA.members.find(m => m.id === activeMemberId);
+        if(member) {
+            const itemIndex = member.history.findIndex(h => h.id === historyId);
+            if(itemIndex > -1) {
+                const removedItem = member.history[itemIndex];
+                const deleteDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                if(!APP_DATA.trashHistory) APP_DATA.trashHistory = [];
+                APP_DATA.trashHistory.push({
+                    memberName: member.name,
+                    amount: removedItem.amount,
+                    addedDate: removedItem.dateTime,
+                    deletedDate: deleteDate
+                });
+
+                member.history.splice(itemIndex, 1);
+                saveAppData();
+                renderMemberDetail();
+                alert("🗑️ হিসাবটি রিমুভ করে ট্র্যাশ বক্সে সংরক্ষণ করা হয়েছে!");
+            }
+        }
     }
 
-    function copyCode() { if (!generatedCode) return; navigator.clipboard.writeText(generatedCode); alert('কোড কপি হয়েছে!'); }
-    function resetAll() { generatedCode = ''; document.getElementById('codeArea').innerText = ''; document.getElementById('previewArea').innerHTML = ''; document.getElementById('charCount').innerText = '0'; }
+    function renderTrashHistory() {
+        const trashContainer = document.getElementById('deletedHistoryLogList');
+        trashContainer.innerHTML = '';
+
+        if(!APP_DATA.trashHistory || APP_DATA.trashHistory.length === 0) {
+            trashContainer.innerHTML = '<div style="text-align:center; color:#888; font-size:0.8rem; padding: 10px;">কোনো রিমুভড হিস্ট্রি নেই।</div>';
+            return;
+        }
+
+        APP_DATA.trashHistory.forEach((trash) => {
+            const div = document.createElement('div');
+            div.style.background = '#0a0a0c';
+            div.style.border = '1px solid var(--danger-color)';
+            div.style.borderRadius = '6px';
+            div.style.padding = '8px';
+            div.style.marginBottom = '6px';
+            div.style.fontSize = '0.78rem';
+            div.innerHTML = `
+                <div style="color: var(--accent-color); font-weight: bold;">👤 ${trash.memberName} - ৳${trash.amount}</div>
+                <div style="color: #ccc;">➕ অ্যাড হয়েছিল: ${trash.addedDate}</div>
+                <div style="color: #ff88a3;">❌ রিমুভ হয়েছে: ${trash.deletedDate}</div>
+            `;
+            trashContainer.appendChild(div);
+        });
+    }
+
+    function setTheme(borderC, highlightC) {
+        document.documentElement.style.setProperty('--border-color', borderC);
+        document.documentElement.style.setProperty('--highlight-color', highlightC);
+    }
+
+    function saveNewPasswords() {
+        const genP = document.getElementById('newGeneralPass').value.trim();
+        if(genP) {
+            APP_DATA.generalPass = genP;
+            saveAppData();
+            document.getElementById('newGeneralPass').value = '';
+            alert("✅ পাসওয়ার্ড আপডেট হয়েছে!");
+            showPage('homePage');
+        }
+    }
+
+    function renderMemberList() {
+        const listEl = document.getElementById('memberList');
+        const grandTotalEl = document.getElementById('grandTotalDisplay');
+        listEl.innerHTML = '';
+        let grandTotal = 0;
+
+        APP_DATA.members.forEach(member => {
+            const memberTotal = member.history.reduce((sum, item) => sum + item.amount, 0);
+            grandTotal += memberTotal;
+
+            const li = document.createElement('li');
+            li.className = 'member-card';
+            li.onclick = () => {
+                activeMemberId = member.id;
+                showPage('detailPage');
+                renderMemberDetail();
+            };
+            li.innerHTML = `
+                <span class="member-info-name">👤 ${member.name}</span>
+                <span class="member-info-total">৳ ${memberTotal}</span>
+            `;
+            listEl.appendChild(li);
+        });
+
+        grandTotalEl.innerText = `সর্বমোট জমা: ৳ ${grandTotal}`;
+        document.getElementById('displayAppTitle').innerText = APP_DATA.appTitle;
+    }
+
+    function renderMemberDetail() {
+        const member = APP_DATA.members.find(m => m.id === activeMemberId);
+        if (!member) return;
+
+        document.getElementById('currentMemberName').innerText = `👤 ${member.name}`;
+        const total = member.history.reduce((sum, item) => sum + item.amount, 0);
+        document.getElementById('currentMemberTotal').innerText = `মোট জমা: ৳ ${total}`;
+
+        const target = APP_DATA.targetAmount || 0;
+        const due = target - total;
+        const targetBox = document.getElementById('targetStatusBox');
+        
+        if (target > 0) {
+            const deadlineDate = new Date(APP_DATA.targetDeadline);
+            const today = new Date();
+            const diffTime = deadlineDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (due <= 0) {
+                targetBox.innerHTML = `🎉 অভিনন্দন! আপনার মিশন বা টার্গেট সফলভাবে পূরণ হয়েছে।`;
+            } else if (diffDays > 0) {
+                const dailyNeeded = Math.ceil(due / diffDays);
+                targetBox.innerHTML = `🎯 টার্গেট: ৳${target} | বকেয়া: ৳${due}<br>⏰ বাকি দিন: <b>${diffDays} দিন</b><br>💡 মিশন পূরণ করতে প্রতিদিন অন্তত <b>৳${dailyNeeded}</b> করে জমা দিতে হবে।`;
+            } else {
+                targetBox.innerHTML = `🎯 টার্গেট: ৳${target} | বকেয়া: ৳${due}<br>⚠️ ডেডলাইন পার হয়ে গেছে!`;
+            }
+        } else {
+            targetBox.innerHTML = `সেটিংস থেকে কোনো টার্গেট অ্যামাউন্ট সেট করা হয়নি।`;
+        }
+
+        const historyListEl = document.getElementById('memberHistoryList');
+        historyListEl.innerHTML = '';
+
+        if(member.history.length === 0) {
+            historyListEl.innerHTML = '<div style="text-align:center; color:#777; font-size:0.85rem;">কোনো হিস্ট্রি নেই।</div>';
+            return;
+        }
+
+        member.history.forEach((item) => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `
+                <div>
+                    <div style="color: #fff; font-weight: bold;">+ ৳ ${item.amount}</div>
+                    <div class="history-date"><i class="far fa-calendar-alt"></i> ${item.dateTime}</div>
+                </div>
+                <button class="delete-history-btn" onclick="deleteHistoryItem(${item.id})">রিমুভ</button>
+            `;
+            historyListEl.appendChild(div);
+        });
+    }
+
+    function applyLinks() {
+        document.getElementById('fbLink').href = "https://facebook.com";
+        document.getElementById('ytLink').href = "https://youtube.com";
+        document.getElementById('ttLink').href = "https://tiktok.com";
+        document.getElementById('floatingAdmin1').href = APP_DATA.admin1ChatLink;
+        document.getElementById('labelAdmin1').innerText = APP_DATA.admin1Name;
+    }
 </script>
 
 </body>
