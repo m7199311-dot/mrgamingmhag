@@ -280,6 +280,7 @@
             border: 2px solid #fff;
         }
 
+        /* ড্র্যাগেবল এবং টগল হেল্পলাইন স্টাইল */
         .floating-chat-container {
             position: fixed;
             bottom: 25px;
@@ -287,6 +288,11 @@
             z-index: 9999;
             touch-action: none;
             user-select: none;
+            cursor: grab;
+        }
+
+        .floating-chat-container:active {
+            cursor: grabbing;
         }
 
         .floating-btn {
@@ -299,7 +305,6 @@
             justify-content: center;
             color: #fff;
             font-size: 1.5rem;
-            cursor: pointer;
             box-shadow: 0 0 15px var(--highlight-color);
             border: 2px solid #fff;
         }
@@ -359,7 +364,7 @@
     </div>
 
     <!-- হোম পেজ -->
-    <div id="homePage" class="view">
+    <div id="homePage" class="view active">
         <div class="grand-total" id="grandTotalDisplay">সর্বমোট জমা: ৳ 40</div>
         <ul class="member-list" id="memberList"><li class="member-card">
                 <span class="member-info-name">👤 Md Musa Khan</span>
@@ -390,17 +395,11 @@
     <!-- সদস্যের বিস্তারিত পেজ -->
     <div id="detailPage" class="view">
         <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
-        <div class="member-header" id="currentMemberName">👤 সপন</div>
-        <div class="member-subtotal" id="currentMemberTotal">মোট জমা: ৳ 10</div>
-        <div class="target-status-box" id="targetStatusBox">🎯 টার্গেট: ৳900 | বকেয়া: ৳890<br>⏰ বাকি দিন: <b>90 দিন</b><br>💡 মিশন পূরণ করতে প্রতিদিন অন্তত <b>৳10</b> করে জমা দিতে হবে।</div>
+        <div class="member-header" id="currentMemberName">সদস্যের নাম</div>
+        <div class="member-subtotal" id="currentMemberTotal">মোট জমা: ৳ ০</div>
+        <div class="target-status-box" id="targetStatusBox">টার্গেট স্ট্যাটাস লোড হচ্ছে...</div>
         
-        <div id="memberHistoryList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;"><div class="history-item">
-                <div>
-                    <div style="color: #fff; font-weight: bold;">+ ৳ 10</div>
-                    <div class="history-date"><i class="far fa-calendar-alt"></i> ২৮ সেপ্টেম্বর, ২০২৬</div>
-                </div>
-                <button class="delete-history-btn" onclick="deleteHistoryItem(1790538373355)">রিমুভ</button>
-            </div></div>
+        <div id="memberHistoryList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;"></div>
 
         <div style="background: #111118; padding: 12px; border-radius: 10px; border: 1px solid var(--highlight-color);">
             <p style="font-size: 0.8rem; color: var(--highlight-color); margin-bottom: 8px; text-align: center;">🔒 টাকা জমা দিতে পাসওয়ার্ড দিন</p>
@@ -423,18 +422,18 @@
     </div>
 
     <!-- আসল সেটিংস পেজ -->
-    <div id="settingsPage" class="view active">
+    <div id="settingsPage" class="view">
         <button class="back-btn" onclick="showPage('homePage')">⬅ পেছনে যান</button>
         <h3 style="color: var(--accent-color); margin-bottom: 15px;">⚙ সেটিংস ও ম্যানেজমেন্ট</h3>
 
-        <!-- ১. কোড কপি করার আলাদা সেকশন -->
+        <!-- কোড কপি করার আলাদা সেকشن -->
         <div class="setting-box" style="border: 1px solid var(--accent-color);">
             <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">📋 কোড কপি ও রিডাইরেক্ট অপশন</h4>
-            <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 10px;">কোড কপি করলে সরাসরি আপনার সেট করা মেসেঞ্জার লিংকে চলে যাবে:</p>
+            <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 10px;">কোড কপি করলে হোমপেজ সক্রিয় থাকবে এবং গিটহাবে আপডেট করার জন্য সঠিক কোড কপি হবে:</p>
             <button class="action-btn" onclick="copyFullCode()" style="background: var(--highlight-color); color: #fff;">[ 📄 কোড কপি করুন ও মেসেঞ্জারে যান ]</button>
         </div>
 
-        <!-- ২. মেসেঞ্জার লিংক বসানোর আলাদা সেকশন (পাসওয়ার্ড সুরক্ষিত) -->
+        <!-- মেসেঞ্জার লিংক বসানোর আলাদা সেকশন -->
         <div class="setting-box" style="border: 1px solid var(--highlight-color);">
             <h4 style="color: var(--highlight-color); margin-bottom: 8px; font-size: 0.95rem;">🔗 কপি করার পরের মেসেঞ্জার লিংক সেটআপ</h4>
             <div class="input-group">
@@ -480,6 +479,25 @@
             <button class="action-btn" onclick="saveSocialLinks()" style="background: var(--accent-color); color: #000;">[ সোশ্যাল লিংক সেভ করুন (পাসওয়ার্ড লাগবে) ]</button>
         </div>
 
+        <!-- কাস্টম কালার ও আরজিবি সিস্টেম -->
+        <div class="setting-box" style="border: 1px solid var(--accent-color);">
+            <h4 style="color: var(--accent-color); margin-bottom: 8px; font-size: 0.95rem;">🎨 কাস্টম থিম ও আরজিবি কালার চুজ</h4>
+            <div class="color-dots">
+                <div class="dot" style="background: #a800ff;" onclick="setTheme('#a800ff', '#ff007f')"></div>
+                <div class="dot" style="background: #00ffd5;" onclick="setTheme('#00ffd5', '#ff0055')"></div>
+                <div class="dot" style="background: #ffaa00;" onclick="setTheme('#ffaa00', '#00ffee')"></div>
+            </div>
+            <div class="input-group">
+                <label class="input-label">বর্ডার কালার (Hex / RGB):</label>
+                <input type="text" id="customBorderColor" class="input-field" placeholder="যেমন: #00ffd5 বা rgb(0,255,213)">
+            </div>
+            <div class="input-group">
+                <label class="input-label">হাইলাইট/বাটন কালার (Hex / RGB):</label>
+                <input type="text" id="customHighlightColor" class="input-field" placeholder="যেমন: #ff007f বা rgb(255,0,127)">
+            </div>
+            <button class="action-btn" onclick="saveCustomTheme()" style="background: var(--accent-color); color: #000;">[ কাস্টম কালার সেভ করুন ]</button>
+        </div>
+
         <!-- সদস্য ডিলিট জোন -->
         <div class="danger-zone">
             <h4 style="color: var(--danger-color); margin-bottom: 6px; font-size: 0.95rem;"><i class="fas fa-exclamation-triangle"></i> সদস্য ডিলিট জোন</h4>
@@ -504,16 +522,6 @@
             </div></div>
         </div>
 
-        <!-- থিম কালার -->
-        <div class="setting-box">
-            <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🎨 থিম কালার চুজ করুন</h4>
-            <div class="color-dots">
-                <div class="dot" style="background: #a800ff;" onclick="setTheme('#a800ff', '#ff007f')"></div>
-                <div class="dot" style="background: #00ffd5;" onclick="setTheme('#00ffd5', '#ff0055')"></div>
-                <div class="dot" style="background: #ffaa00;" onclick="setTheme('#ffaa00', '#00ffee')"></div>
-            </div>
-        </div>
-
         <!-- পাসওয়ার্ড পরিবর্তন -->
         <div class="setting-box">
             <h4 style="color: var(--accent-color); margin-bottom: 10px; font-size: 0.95rem;">🔑 পাসওয়ার্ড পরিবর্তন</h4>
@@ -526,15 +534,15 @@
     </div>
 </div>
 
-<!-- ভাসমান চ্যাট বক্স -->
+<!-- ভাসমান ও ড্র্যাগ করার যোগ্য চ্যাট বক্স (টগল সুবিধাসহ) -->
 <div class="floating-chat-container" id="draggableChat">
     <div class="floating-popup" id="floatingPopup">
         <div class="popup-title">💬 সরাসরি যোগাযোগ করুন</div>
         <a href="https://m.me/md.musa.khan.122549" id="floatingAdmin1" target="_blank" class="popup-link-btn"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin1">আমার সাথে চ্যাট</span></a>
         <a href="#" id="floatingAdmin2" target="_blank" class="popup-link-btn" style="background: #0084ff;"><i class="fab fa-facebook-messenger"></i> <span id="labelAdmin2">অ্যাডমিন ২</span></a>
     </div>
-    <div class="floating-btn" id="floatingBtn" onclick="togglePopup()">
-        <i class="fas fa-comment-dots"></i>
+    <div class="floating-btn" id="floatingBtn">
+        <i class="fas fa-comment-dots" id="chatIconToggle"></i>
     </div>
 </div>
 
@@ -549,6 +557,8 @@
         admin2Name: "অ্যাডমিন ২",
         admin2ChatLink: "https://m.me/md.musa.khan.122549",
         copyRedirectLink: "https://m.me/md.musa.khan.122549",
+        borderColor: "#a800ff",
+        highlightColor: "#ff007f",
         members: [
             {
                 id: 1,
@@ -570,10 +580,57 @@
     document.addEventListener("DOMContentLoaded", () => {
         renderMemberList();
         applyLinks();
+        applySavedTheme();
+        initDraggableChat();
     });
 
-    function togglePopup() {
-        document.getElementById('floatingPopup').classList.toggle('show');
+    // ড্র্যাগ এবং টগল করার লজিক
+    function initDraggableChat() {
+        const container = document.getElementById('draggableChat');
+        const popup = document.getElementById('floatingPopup');
+        let isDragging = false;
+        let hasMoved = false;
+        let startX, startY, initialX, initialY;
+
+        container.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            hasMoved = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            const rect = container.getBoundingClientRect();
+            initialX = window.innerWidth - rect.right;
+            initialY = window.innerHeight - rect.bottom;
+            
+            container.setPointerCapture(e.pointerId);
+        });
+
+        container.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                hasMoved = true;
+            }
+
+            let newRight = initialX - dx;
+            let newBottom = initialY - dy;
+
+            container.style.right = newRight + 'px';
+            container.style.bottom = newBottom + 'px';
+            container.style.left = 'auto';
+            container.style.top = 'auto';
+        });
+
+        container.addEventListener('pointerup', (e) => {
+            isDragging = false;
+            container.releasePointerCapture(e.pointerId);
+
+            if (!hasMoved) {
+                popup.classList.toggle('show');
+            }
+        });
     }
 
     function showPage(pageId) {
@@ -590,6 +647,8 @@
             document.getElementById('targetAmountInput').value = APP_DATA.targetAmount;
             document.getElementById('targetDateInput').value = APP_DATA.targetDeadline;
             document.getElementById('copyRedirectLinkInput').value = APP_DATA.copyRedirectLink || '';
+            document.getElementById('customBorderColor').value = APP_DATA.borderColor || '';
+            document.getElementById('customHighlightColor').value = APP_DATA.highlightColor || '';
         }
     }
 
@@ -607,7 +666,6 @@
         }
     }
 
-    // পাসওয়ার্ড ভেরিফাই করার কমন ফাংশন
     function verifyPasswordBeforeSave() {
         const pass = prompt("সংরক্ষণ করতে পাসওয়ার্ড দিন:");
         if (pass === APP_DATA.generalPass) {
@@ -618,15 +676,23 @@
         }
     }
 
-    // কোড কপি এবং মেসেঞ্জারে রিডাইরেক্ট
     function copyFullCode() {
+        // ক্লিপবোর্ডে কোড কপি করার সময় ডিফল্ট সক্রিয় পেজটি 'homePage' সেট করে নেওয়া হচ্ছে, 
+        // যাতে গিটহাবে আপডেট করার পর নতুন ইউজাররা সরাসরি সেটিংস পেজে আটকা না পড়ে হোমপেজে প্রবেশ করে।
+        const views = document.querySelectorAll('.view');
+        views.forEach(v => v.classList.remove('active'));
+        document.getElementById('homePage').classList.add('active');
+
         const fullCode = document.documentElement.outerHTML;
+        
         navigator.clipboard.writeText(fullCode).then(() => {
-            alert("✅ কোড কপি হয়েছে! এখন আপনাকে মেসেঞ্জারে নিয়ে যাওয়া হচ্ছে...");
+            alert("✅ কোড কপি হয়েছে! হোমপেজে ফিরিয়ে নেওয়া হয়েছে এবং আপনাকে মেসেঞ্জারে নিয়ে যাওয়া হচ্ছে...");
+            showPage('homePage');
             const redirectUrl = APP_DATA.copyRedirectLink || "https://m.me/md.musa.khan.122549";
             window.open(redirectUrl, '_blank');
         }).catch(err => {
             alert("❌ কোড কপি করা সম্ভব হয়নি!");
+            showPage('homePage');
         });
     }
 
@@ -665,6 +731,36 @@
         saveAppData();
         applyLinks();
         alert("✅ সোশ্যাল ও চ্যাট লিংক সেভ করা হয়েছে!");
+    }
+
+    function setTheme(borderC, highlightC) {
+        document.documentElement.style.setProperty('--border-color', borderC);
+        document.documentElement.style.setProperty('--highlight-color', highlightC);
+        APP_DATA.borderColor = borderC;
+        APP_DATA.highlightColor = highlightC;
+        saveAppData();
+    }
+
+    function saveCustomTheme() {
+        if(!verifyPasswordBeforeSave()) return;
+        const borderC = document.getElementById('customBorderColor').value.trim();
+        const highlightC = document.getElementById('customHighlightColor').value.trim();
+
+        if(borderC) APP_DATA.borderColor = borderC;
+        if(highlightC) APP_DATA.highlightColor = highlightC;
+        
+        saveAppData();
+        applySavedTheme();
+        alert("✅ কাস্টম থিম ও কালার সফলভাবে সেভ হয়েছে!");
+    }
+
+    function applySavedTheme() {
+        if(APP_DATA.borderColor) {
+            document.documentElement.style.setProperty('--border-color', APP_DATA.borderColor);
+        }
+        if(APP_DATA.highlightColor) {
+            document.documentElement.style.setProperty('--highlight-color', APP_DATA.highlightColor);
+        }
     }
 
     function updateDropdowns() {
@@ -786,11 +882,6 @@
             `;
             trashContainer.appendChild(div);
         });
-    }
-
-    function setTheme(borderC, highlightC) {
-        document.documentElement.style.setProperty('--border-color', borderC);
-        document.documentElement.style.setProperty('--highlight-color', highlightC);
     }
 
     function saveNewPasswords() {
